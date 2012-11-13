@@ -3,3 +3,4 @@ server/node_modules
 //data files
 server/data/tasks.json
 server/data/nextTasks.json
+server/data/pendingTasks.json
