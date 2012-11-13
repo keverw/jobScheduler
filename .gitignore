@@ -1,1 +1,4 @@
 server/node_modules
+
+//data files
+server/data/tasks.json
