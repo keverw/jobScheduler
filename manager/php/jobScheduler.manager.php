@@ -8,7 +8,7 @@
 			$this->server = $server;
 		}
 		
-		public function addTask($title, $scriptURL, $when)
+		public function addJob($title, $scriptURL, $when)
 		{
 			$result = $this->DoHTTP(
 				$this->server . 'addJob',
