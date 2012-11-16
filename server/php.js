@@ -55,27 +55,27 @@ global.md5 = function(str) { //Calculate the md5 hash of a string - http://php.n
 
 global.time = function() { //Return current Unix timestamp - http://php.net/manual/en/function.time.php
 	// http://kevin.vanzonneveld.net
-	// + original by: GeekFG (http://geekfg.blogspot.com)
-	// +	improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-	// +	improved by: metjay
-	// +	improved by: HKM
-	// * example 1: timeStamp = time();
-	// * results 1: timeStamp > 1000000000 && timeStamp < 2000000000
+	//+ original by: GeekFG (http://geekfg.blogspot.com)
+	//+	improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+	//+	improved by: metjay
+	//+	improved by: HKM
+	//* example 1: timeStamp = time();
+	//* results 1: timeStamp > 1000000000 && timeStamp < 2000000000
 	return Math.floor(new Date().getTime() / 1000);
 }
 
 global.count = function(mixed_var, mode) { //Count all elements in an array, or something in an object - http://php.net/manual/en/function.count.php
 	// http://kevin.vanzonneveld.net
-	// + original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-	// +	input by: Waldo Malqui Silva
-	// +	bugfixed by: Soren Hansen
-	// +	input by: merabi
-	// +	improved by: Brett Zamir (http://brett-zamir.me)
-	// +	bugfixed by: Olivier Louvignes (http://mg-crea.com/)
-	// * example 1: count([[0,0],[0,-4]], 'COUNT_RECURSIVE');
-	// *	returns 1: 6
-	// * example 2: count({'one' : [1,2,3,4,5]}, 'COUNT_RECURSIVE');
-	// *	returns 2: 6
+	//+ original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+	//+	input by: Waldo Malqui Silva
+	//+	bugfixed by: Soren Hansen
+	//+	input by: merabi
+	//+	improved by: Brett Zamir (http://brett-zamir.me)
+	//+	bugfixed by: Olivier Louvignes (http://mg-crea.com/)
+	//* example 1: count([[0,0],[0,-4]], 'COUNT_RECURSIVE');
+	//*	returns 1: 6
+	//* example 2: count({'one' : [1,2,3,4,5]}, 'COUNT_RECURSIVE');
+	//*	returns 2: 6
 	var key, cnt = 0;
 
 	if (mixed_var === null || typeof mixed_var === 'undefined') {
