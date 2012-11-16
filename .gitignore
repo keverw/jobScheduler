@@ -1,11 +1,6 @@
 server/node_modules
 
-#old data files
-server/data/tasks.json
-server/data/nextTasks.json
-server/data/runningTasks.json
-
 #data files
-
+server/data/jobs.json
 server/data/nextJobs.json
 server/data/runningJobs.json
