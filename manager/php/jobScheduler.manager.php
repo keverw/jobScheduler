@@ -8,6 +8,31 @@
 			$this->server = $server;
 		}
 		
+		public function jobList()
+		{
+			$result = $this->DoHTTP($this->server . 'listJobs');
+			
+			$outputArray = array(
+				'HttpStatusCode' => $result['status']
+			);
+			
+			if ($result['status'] == 200)
+			{
+				$data = @json_decode($result['output'], true);
+				
+				if (is_array($data))
+				{
+					$outputArray = array_merge($outputArray, $data);
+				}
+				
+				return $outputArray;
+			}
+			else
+			{
+				return $outputArray;
+			}
+		}
+		
 		public function addJob($title, $scriptURL, $when)
 		{
 			$result = $this->DoHTTP(

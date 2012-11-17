@@ -14,13 +14,30 @@ module.exports = {
 				jobInfo.when = jobs[jobID].when;
 				jobInfo.added = jobs[jobID].added;
 				
-				//todo: add if it's pending(and when) or if it's running and when it started
+				if (nextJobs.hasOwnProperty(jobID))
+				{
+					jobInfo.nextRun = +nextJobs[jobID];
+				}
+				else
+				{
+					jobInfo.nextRun = 0;
+				}
 				
-				console.log(jobInfo);
+				if (runningJobs.hasOwnProperty(jobID))
+				{
+					jobInfo.isRunning = true;
+					jobInfo.runStart = +runningJobs[jobID];
+				}
+				else
+				{
+					jobInfo.isRunning = false;
+					jobInfo.runStart = 0;
+				}
+				
+				jobList[jobID] = jobInfo;
 			}
 		}
 		
-		res.send('hello world');
-		
+		res.send({list: jobList});
 	}
 }
