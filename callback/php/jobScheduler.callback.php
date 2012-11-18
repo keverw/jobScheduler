@@ -10,10 +10,8 @@
 		
 		public function done($id)
 		{
-			$result = $this->DoHTTP($this->server . 'unlockJob/' . $id);	
-			$result2 = $this->processHTTP($result['status'], $result['output']);
-			
-			if ($result2['unlockStatus'] == 'ALREADY' || $result2['unlockStatus'] == 'UNLOCKED')
+			$result = $this->DoHTTP($this->server . 'unlockJob/' . $id);
+			if ($result['unlockStatus'] == 'ALREADY' || $result['unlockStatus'] == 'UNLOCKED')
 			{
 				return true;
 			}
@@ -71,16 +69,11 @@
 			}
 		
 			//execute post
-			$returnoutput['output'] = curl_exec($ch);
-			//Get status
-			$returnoutput['status'] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-			//close connection
+			$output = curl_exec($ch);
+			$status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 			curl_close($ch);
-			return $returnoutput;
-		}
-		
-		private function processHTTP($status, $output)
-		{
+			
+			//process output
 			$outputArray = array(
 				'HttpStatusCode' => $status
 			);
