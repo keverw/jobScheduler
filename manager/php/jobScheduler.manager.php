@@ -48,6 +48,12 @@
 			return $this->processHTTP($result['status'], $result['output']);
 		}
 		
+		public function deleteJob($id)
+		{
+			$result = $this->DoHTTP($this->server . 'deleteJob/' . $id);	
+			return $this->processHTTP($result['status'], $result['output']);
+		}
+		
 		private function DoHTTP($URL, $post_fields = array())
 		{
 			$returnoutput = array();
