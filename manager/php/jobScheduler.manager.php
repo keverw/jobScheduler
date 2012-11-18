@@ -10,52 +10,14 @@
 		
 		public function jobInfo($id)
 		{
-			$result = $this->DoHTTP($this->server . 'jobInfo/' . $id);
-			
-			$outputArray = array(
-				'HttpStatusCode' => $result['status']
-			);
-			
-			if ($result['status'] == 200)
-			{
-				$data = @json_decode($result['output'], true);
-				
-				if (is_array($data))
-				{
-					$outputArray = array_merge($outputArray, $data);
-				}
-				
-				return $outputArray;
-			}
-			else
-			{
-				return $outputArray;
-			}
+			$result = $this->DoHTTP($this->server . 'jobInfo/' . $id);	
+			return $this->processHTTP($result['status'], $result['output']);
 		}
 		
 		public function jobList()
 		{
 			$result = $this->DoHTTP($this->server . 'listJobs');
-			
-			$outputArray = array(
-				'HttpStatusCode' => $result['status']
-			);
-			
-			if ($result['status'] == 200)
-			{
-				$data = @json_decode($result['output'], true);
-				
-				if (is_array($data))
-				{
-					$outputArray = array_merge($outputArray, $data);
-				}
-				
-				return $outputArray;
-			}
-			else
-			{
-				return $outputArray;
-			}
+			return $this->processHTTP($result['status'], $result['output']);
 		}
 		
 		public function addJob($title, $scriptURL, $when)
@@ -69,25 +31,21 @@
 				)
 			);
 			
-			$outputArray = array(
-				'HttpStatusCode' => $result['status']
+			return $this->processHTTP($result['status'], $result['output']);
+		}
+		
+		public function updateJob($id, $title, $scriptURL, $when)
+		{
+			$result = $this->DoHTTP(
+				$this->server . 'updateJob/' . $id,
+				array(
+					'title' => $title,
+					'scriptURL' => $scriptURL,
+					'when' => $when
+				)
 			);
 			
-			if ($result['status'] == 200)
-			{
-				$data = @json_decode($result['output'], true);
-				
-				if (is_array($data))
-				{
-					$outputArray = array_merge($outputArray, $data);
-				}
-				
-				return $outputArray;
-			}
-			else
-			{
-				return $outputArray;
-			}
+			return $this->processHTTP($result['status'], $result['output']);
 		}
 		
 		private function DoHTTP($URL, $post_fields = array())
@@ -117,6 +75,29 @@
 			//close connection
 			curl_close($ch);
 			return $returnoutput;
+		}
+		
+		private function processHTTP($status, $output)
+		{
+			$outputArray = array(
+				'HttpStatusCode' => $status
+			);
+			
+			if ($status == 200)
+			{
+				$data = @json_decode($output, true);
+				
+				if (is_array($data))
+				{
+					$outputArray = array_merge($outputArray, $data);
+				}
+				
+				return $outputArray;
+			}
+			else
+			{
+				return $outputArray;
+			}
 		}
 	}
 ?>
