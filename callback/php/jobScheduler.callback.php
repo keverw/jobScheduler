@@ -1,5 +1,11 @@
 <?php
-	class jobScheduler
+	/**
+	* @project jobScheduler
+	* @version 0.1
+	* @url https://github.com/keverw/jobScheduler
+	* @about The callback class.
+	**/
+	class jobSchedulerCB
 	{
 		private $server = null;
 		

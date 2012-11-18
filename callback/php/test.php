@@ -8,7 +8,7 @@
 	
 	$jobSchedulerHost = 'http://localhost:5188/';
 	
-	$jobSchedulerCB = new jobScheduler($jobSchedulerHost);
+	$jobSchedulerCB = new jobSchedulerCB($jobSchedulerHost);
 	
 	$php_console = new php_console('localhost', '5088');
 	$php_console->output('Got a request!!!');

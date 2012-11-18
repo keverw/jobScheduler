@@ -1,4 +1,10 @@
 <?php
+	/**
+	* @project jobScheduler
+	* @version 0.1
+	* @url https://github.com/keverw/jobScheduler
+	* @about The manager class.
+	**/
 	class jobScheduler
 	{
 		private $server = null;
