@@ -11,7 +11,6 @@ module.exports = {
 			
 			if (runningJobs.hasOwnProperty(jobID))
 			{
-				console.log('already');
 				startStatus = 'ALREADY';
 			}
 			else
