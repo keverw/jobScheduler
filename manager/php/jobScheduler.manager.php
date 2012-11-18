@@ -54,6 +54,12 @@
 			return $this->processHTTP($result['status'], $result['output']);
 		}
 		
+		public function runJob($id)
+		{
+			$result = $this->DoHTTP($this->server . 'runJob/' . $id);	
+			return $this->processHTTP($result['status'], $result['output']);
+		}
+		
 		private function DoHTTP($URL, $post_fields = array())
 		{
 			$returnoutput = array();
