@@ -60,6 +60,12 @@
 			return $this->processHTTP($result['status'], $result['output']);
 		}
 		
+		public function unlockJob($id)
+		{
+			$result = $this->DoHTTP($this->server . 'unlockJob/' . $id);	
+			return $this->processHTTP($result['status'], $result['output']);
+		}
+		
 		private function DoHTTP($URL, $post_fields = array())
 		{
 			$returnoutput = array();
