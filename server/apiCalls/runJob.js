@@ -19,7 +19,7 @@ module.exports = {
 				
 				if (jobs.hasOwnProperty(jobID))
 				{
-					callScript(jobs[jobID].url);
+					callScript(jobs[jobID].url, jobID);
 				}
 				
 				saveData('runningJobs');
