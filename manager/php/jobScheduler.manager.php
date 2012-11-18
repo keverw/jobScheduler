@@ -10,19 +10,17 @@
 		
 		public function jobInfo($id)
 		{
-			$result = $this->DoHTTP($this->server . 'jobInfo/' . $id);	
-			return $this->processHTTP($result['status'], $result['output']);
+			return $this->request($this->server . 'jobInfo/' . $id);
 		}
 		
 		public function jobList()
 		{
-			$result = $this->DoHTTP($this->server . 'listJobs');
-			return $this->processHTTP($result['status'], $result['output']);
+			return $this->request($this->server . 'listJobs');
 		}
 		
 		public function addJob($title, $scriptURL, $when)
 		{
-			$result = $this->DoHTTP(
+			return $this->request(
 				$this->server . 'addJob',
 				array(
 					'title' => $title,
@@ -30,13 +28,11 @@
 					'when' => $when
 				)
 			);
-			
-			return $this->processHTTP($result['status'], $result['output']);
 		}
 		
 		public function updateJob($id, $title, $scriptURL, $when)
 		{
-			$result = $this->DoHTTP(
+			return $this->request(
 				$this->server . 'updateJob/' . $id,
 				array(
 					'title' => $title,
@@ -44,29 +40,24 @@
 					'when' => $when
 				)
 			);
-			
-			return $this->processHTTP($result['status'], $result['output']);
 		}
 		
 		public function deleteJob($id)
 		{
-			$result = $this->DoHTTP($this->server . 'deleteJob/' . $id);	
-			return $this->processHTTP($result['status'], $result['output']);
+			return $this->request($this->server . 'deleteJob/' . $id);
 		}
 		
 		public function runJob($id)
 		{
-			$result = $this->DoHTTP($this->server . 'runJob/' . $id);	
-			return $this->processHTTP($result['status'], $result['output']);
+			return $this->request($this->server . 'runJob/' . $id);
 		}
 		
 		public function unlockJob($id)
 		{
-			$result = $this->DoHTTP($this->server . 'unlockJob/' . $id);	
-			return $this->processHTTP($result['status'], $result['output']);
+			return $this->request($this->server . 'unlockJob/' . $id);	
 		}
 		
-		private function DoHTTP($URL, $post_fields = array())
+		private function request($URL, $post_fields = array())
 		{
 			$returnoutput = array();
 			//open connection
@@ -87,16 +78,11 @@
 			}
 		
 			//execute post
-			$returnoutput['output'] = curl_exec($ch);
-			//Get status
-			$returnoutput['status'] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-			//close connection
+			$output = curl_exec($ch);
+			$status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 			curl_close($ch);
-			return $returnoutput;
-		}
-		
-		private function processHTTP($status, $output)
-		{
+			
+			//process output
 			$outputArray = array(
 				'HttpStatusCode' => $status
 			);
