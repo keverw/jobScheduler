@@ -103,7 +103,60 @@ module.exports = {
 				}
 				else //update info, and job id
 				{
-					console.log('update id & info');
+					//did when change?
+					var updateWhen = false;
+					if (when != jobs[jobID].when)
+					{
+						updateWhen = true;
+					}
+				
+					var oldJob = jobs[jobID];
+					delete jobs[jobID];
+					
+					jobs[UpdateJobID] = {
+						title: title,
+						url: scriptURL,
+						when: when,
+						added: oldJob.added
+					};
+					
+					saveData('jobs');
+					
+					if (runningJobs.hasOwnProperty(jobID))
+					{
+						var oldRunningJob = runningJobs[jobID];
+						delete runningJobs[jobID];
+						
+						runningJobs[UpdateJobID] = oldRunningJob;
+						
+						saveData('runningJobs');
+					}
+					
+					if (nextJobs.hasOwnProperty(jobID))
+					{
+						var oldNextJobs = nextJobs[jobID];
+						delete nextJobs[jobID];
+						
+						nextJobs[UpdateJobID] = oldNextJobs;
+						
+						saveData('nextJobs');
+					}
+					
+					saveData('jobs');
+					
+					if (updateWhen)
+					{
+						if (!runningJobs.hasOwnProperty(UpdateJobID))
+						{
+							if (when > 0)
+							{
+								nextJobs[UpdateJobID] = time() + when;
+								saveData('nextJobs');
+							}
+						}
+					}
+					
+					info.success = 'updated';
 				}
 			}
 			
