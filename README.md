@@ -1,6 +1,6 @@
 #jobScheduler
 
-**Version 0.1**
+**Version 0.2**
 
 The goal of jobScheduler is to be a server that runs tasks every x second's, like cron's in *NIX systems, but as a centralized server to manage them and run them. The server is written in Node.js and clients can be written in other languages, such as PHP.
 
