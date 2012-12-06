@@ -1,7 +1,7 @@
 <?php
 	/**
 	* @project jobScheduler
-	* @version 0.1
+	* @version 0.2
 	* @url https://github.com/keverw/jobScheduler
 	* @about The callback class.
 	**/
@@ -16,14 +16,21 @@
 		
 		public function done($id)
 		{
-			$result = $this->request($this->server . 'unlockJob/' . $id);
-			if ($result['unlockStatus'] == 'ALREADY' || $result['unlockStatus'] == 'UNLOCKED')
+			if ($id)
 			{
-				return true;
+				$result = $this->request($this->server . 'unlockJob/' . $id);
+				if ($result['unlockStatus'] == 'ALREADY' || $result['unlockStatus'] == 'UNLOCKED')
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
 			}
 			else
 			{
-				return false;
+				return true; //null id
 			}
 		}
 		
